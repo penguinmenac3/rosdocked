@@ -36,6 +36,9 @@ RUN apt-get install -y ros-indigo-desktop-full
 RUN apt-get install -y x11-apps python-pip build-essential
 RUN pip install catkin_tools
 
+# Install utility stuff
+RUN apt-get install -y tmux nano screen
+
 # Make SSH available
 EXPOSE 22
 
