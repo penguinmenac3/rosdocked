@@ -30,7 +30,7 @@ RUN apt-get install -y\
   libxkbcommon0
 
 # The rest of ROS-desktop
-RUN apt-get install -y ros-indigo-desktop-full
+RUN apt-get install -y ros-indigo-desktop-full ros-indigo-scan-tools
 
 # Additional development tools
 RUN apt-get install -y x11-apps python-pip build-essential
