@@ -36,9 +36,24 @@ RUN apt-get install -y ros-indigo-desktop-full
 RUN apt-get install -y x11-apps python-pip build-essential
 RUN pip install catkin_tools
 
+# Install gtsam
+RUN apt-get install -y libboost-all-dev cmake libtbb-dev git
+RUN \
+  mkdir /opt/gtsam && \
+  cd /opt/gtsam && \
+  git clone https://bitbucket.org/gtborg/gtsam.git && \
+  cd gtsam && \
+  mkdir build && \
+  cd build && \
+  cmake -DCMAKE_BUILD_TYPE=Release -DGTSAM_ALLOW_DEPRECATED_SINCE_V4=OFF .. && \
+  make -j4 && \
+  make install && \
+  ldconfig
+
+
 # Install utility stuff
 RUN apt-get install -y tmux nano screen
-RUN apt-get install -y ros-indigo-scan-tools
+RUN apt-get install -y ros-indigo-scan-tools ros-indigo-slam-gmapping
 RUN \
   echo "cd ~/kamaro/catkin_ws; source devel/setup.zsh" >> /usr/local/bin/kcw && \
   echo "export ROS_MASTER_URI=http://192.168.1.42:11311; export ROS_IP=`ip a| sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`" >> /usr/local/bin/btr
