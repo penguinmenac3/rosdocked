@@ -52,7 +52,7 @@ RUN \
 
 
 # Install utility stuff
-RUN apt-get install -y tmux nano screen
+RUN apt-get install -y tmux nano screen python-pygame
 RUN apt-get install -y ros-indigo-scan-tools ros-indigo-slam-gmapping
 RUN \
   echo "cd ~/kamaro/catkin_ws; source devel/setup.zsh" >> /usr/local/bin/kcw && \
